@@ -200,7 +200,7 @@ sub isPasswordValid {
 # call to Zimbra mailbox creation command (should use SOAP/API call instead)
 sub zmCreateMailbox {
 	for my $mail (keys %users) {
-		system('/opt/zimbra/bin/zmprov', 'ca', $mail, $args{adminpassword});	# TODO : use REST API
+		system('/opt/zimbra/bin/zmprov', 'ca', $mail, $args{password});	# TODO : use REST API
 		warn ">> WARN: mailbox '$mail' was not created\n"	if ! $? == 0;
 	}
 }
