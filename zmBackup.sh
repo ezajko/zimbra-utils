@@ -17,8 +17,8 @@ function print_usage {
 	echo -e "First, edit the \"CONFIGURATION\" part of the script.\n"
 	echo
 	echo -e "zmBackup usage :\n"
-	echo -e "- backup # ./zmBackup : backup accounts according to the \"CONFIGURATION\" part.\n"
-	echo -e "- restore # ./zmBackup -r|--restore : restore all accounts according to the \"CONFIGURATION\" part.\n"
+	echo -e "- backing up # ./zmBackup -b|--backup : backup accounts according to the \"CONFIGURATION\" part.\n"
+	echo -e "- restoring # ./zmBackup -r|--restore : restore all accounts according to the \"CONFIGURATION\" part.\n"
 }
 
 function checkConf {
@@ -147,11 +147,11 @@ function checkUser {
 }
 
 function parseArgs {
-	if [[ $# == 0 ]]; then
-		# Just backup accounts
-		RESTORE=0
-	else
+	if [[ $# == 1 ]]; then
 		if [[ $1 == "-r" || $1 == "--restore" ]]; then
+			# Just backup accounts
+			RESTORE=0
+		elif [[ $1 == "-b" || $1 == "--backup" ]]; then
 			# Restore accounts
 			RESTORE=1
 		else
@@ -159,6 +159,10 @@ function parseArgs {
 			print_usage
 			exit 3
 		fi
+	else
+		# Unknown argument
+		print_usage
+		exit 3
 	fi
 }
 
