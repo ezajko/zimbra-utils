@@ -148,10 +148,10 @@ function checkUser {
 
 function parseArgs {
 	if [[ $# == 1 ]]; then
-		if [[ $1 == "-r" || $1 == "--restore" ]]; then
+		if [[ $1 == "-b" || $1 == "--backup" ]]; then
 			# Just backup accounts
 			RESTORE=0
-		elif [[ $1 == "-b" || $1 == "--backup" ]]; then
+		elif [[ $1 == "-r" || $1 == "--restore" ]]; then
 			# Restore accounts
 			RESTORE=1
 		else
