@@ -1,5 +1,4 @@
 #! /usr/bin/perl
-# sdfksdhfsd
 
 use strict;
 use warnings;
