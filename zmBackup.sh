@@ -118,12 +118,9 @@ function backupAccounts {
 		/opt/zimbra/bin/zmmailbox -z -m $ZIMBRA_ACCOUNT getRestURL "//?fmt=tgz" > ${LOCAL_DIR}/${ZIMBRA_ACCOUNT}.tgz 2>> ${LOCAL_DIR}/zimbra-backup.txt
 	done;
 
-	# Save LDAP and MySQL DBs
-	echo $(date '+%y-%m-%d %H:%M') " Making full backup of LDAP and MySQL DBs for disaster recovery" >> ${LOCAL_DIR}/zimbra-backup.txt
+	# Save LDAP DB
+	echo $(date '+%y-%m-%d %H:%M') " Making full backup of LDAP DB for disaster recovery" >> ${LOCAL_DIR}/zimbra-backup.txt
 	/opt/zimbra/libexec/zmslapcat $LOCAL_DIR
-	source /opt/zimbra/bin/zmshutil
-	zmsetvars
-	/opt/zimbra/mysql/bin/mysqldump --events --user=root --password=$mysql_root_password --socket=$mysql_socket --all-databases --single-transaction --flush-logs > ${LOCAL_DIR}/mysql.bak
 	 
 	# Send it to remote
 	scp -r $LOCAL_DIR ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR} >> ${LOCAL_DIR}/zimbra-backup.txt
