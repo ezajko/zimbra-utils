@@ -42,7 +42,7 @@ function checkClientName {
                 ERROR_MSG=''
 
                 # client name must have valid format
-                REG='^[a-zA-Z0-9-]$'
+                REG='^[a-zA-Z0-9-]+$'
                 [[ $CLIENT =~ $REG ]] || ERROR_MSG="$CLIENT is not a valid client name !"
 
                 # check directory in $SFTP_DIR
